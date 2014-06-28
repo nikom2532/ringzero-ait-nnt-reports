@@ -1,0 +1,348 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="ie6 oldie"> <![endif]-->
+<!--[if IE 7]>    <html class="ie7 oldie"> <![endif]-->
+<!--[if IE 8]>    <html class="ie8 oldie"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="">
+<!--<![endif]-->
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{site_title} :: {report_name}</title>
+
+
+    <link href="{base_url}assets/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="{base_url}assets/css/style-report.css" rel="stylesheet" type="text/css" />
+    <link href="{base_url}assets/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="{base_url}assets/css/jquery-ui.css" rel="stylesheet" type="text/css"/>
+
+</head>
+
+<body>
+	
+    <div class="wapper">
+    	<div class="header">
+           
+            <div class="navlink"><span class="clearfix"><p class="float_l"><a href="{base_url}index.php/main/index"><img src="{base_url}assets/img/house.png" style="margin-top:-4px"/></a>
+        	{lbl_welcome}  <span class="blue-txt">นายชื่อ นามสกุล |</span></p><a href="{base_url}index.php/authenticator/signout" class="blue-txt link-logout">{lbl_signout}</a></span></div>
+        </div>
+        
+        
+        <div class="bor_bottom02"></div>
+        
+        <div>
+        	<h2>รายงานแบบไดนามิก</h2>
+        </div>
+        
+        <form>           
+            <div class="report-name">
+               <div>
+                   <span>ชื่อรายงาน</span>        		
+                   <input type="text" name="namereport"  /><br/>        		
+               </div>
+               <div class="clear"></div>    
+           </div>          
+       </form>
+       <form> 
+        <div class="con-input-ch clearfix">
+         
+        	<div>
+               <div>                	
+                   <p>คำค้นหา : &nbsp; </p> <input type="checkbox" name="selection1" value="Yes"  />                    
+               </div>
+           </div>
+           
+           <div>
+               <div>              	
+                   <p>สังกัด : &nbsp;</p><input type="checkbox" name="selection1" value="Yes"  /><p>&nbsp; ใช้งาน</p>
+               </div>                   
+           </div>
+           
+           <div>   
+               <div>             	
+                   <p>จังหวัด : &nbsp;</p><input type="checkbox" name="selection1" value="Yes"  /> <p>&nbsp; ใช้งาน</p>   
+               </div>             
+           </div>            
+           
+           <div>             
+               <div>   	
+                   <p>ช่วงวันที่ : &nbsp;</p><input type="checkbox" name="selection1" value="Yes"  /> <p>&nbsp; ใช้งาน</p>    
+               </div>            
+           </div>
+           
+           <div>
+               <div>                	
+                   <p>หน่วยใช้งาน : &nbsp;</p><input type="checkbox" name="selection1" value="Yes"  /> <p>&nbsp; ใช้งาน</p>
+               </div>                
+           </div>
+           
+           <div>
+               <div>                	
+                   <p>ผู้สื่อข่าว : &nbsp;</p><input type="checkbox" name="selection1" value="Yes"  /> <p>&nbsp; ใช้งาน</p>
+               </div>                
+           </div>
+           
+           <div>
+               <div>              	
+                   <p>ประเภทข่าว : &nbsp;</p><input type="checkbox" name="selection1" value="Yes"  /> <p>&nbsp; ใช้งาน</p>
+               </div>                
+           </div>
+           
+           <div>
+               <div>                	
+                   <p>ประเภทข่าวย่อย : &nbsp;</p><input type="checkbox" name="selection1" value="Yes"  /> <p>&nbsp; ใช้งาน</p>    
+               </div>            
+           </div>
+           
+       </div> 	<!--con-input-ch-->
+   </form>
+   <div class="clear"></div> 
+   
+   <!--but_form03-->       
+   <div class="bor_bottom"></div>
+   
+   
+   <div class="con-col-01 clearfix">
+    <div class="con-arrow">
+        <!-- <div><a href="#"><img src="{base_url}assets/img/next3_07.png"></a></div> -->
+        <!-- <div><a href="#"><img src="{base_url}assets/img/prev2_07.png"></a></div> -->
+    </div>
+
+    <div id="fieldChooser" tabIndex="1">
+
+        <ul class="report-box report-box08 col-l">
+        	<span>รายการข้อมูลทั้งหมด</span>
+         <li class="header-report clearfix">
+           <div><span>เลือก</span></div>
+           <div><span>หัวข้อ</span></div>    			
+       </li>
+       
+       <li>
+        <div id="sourceFields">
+            <div><input type="hidden" name="field[]" value="1">1</div>
+            <div><input type="hidden" name="field[]" value="2">2</div>
+            <div><input type="hidden" name="field[]" value="3">3</div>
+            <div><input type="hidden" name="field[]" value="4">4</div>
+            <div><input type="hidden" name="field[]" value="5">5</div>
+            <div><input type="hidden" name="field[]" value="6">6</div>
+            <div><input type="hidden" name="field[]" value="7">7</div>
+            <div><input type="hidden" name="field[]" value="8">8</div>
+            <div><input type="hidden" name="field[]" value="9">9</div>
+            <div><input type="hidden" name="field[]" value="10">10</div>
+        </div>
+    </li>
+            <!-- <li class="row-report clearfix">
+            	<div>
+                	<form>
+                		<input type="checkbox" name="selection1" value="Yes"  />
+                    </form>
+                </div>
+				<div><span>ประเภทข่าว</span></div>    						  			
+			</li>
+            
+            <li class="row-report gray-bg clearfix">
+            	<div>
+                	<form>
+                		<input type="checkbox" name="selection1" value="Yes" />
+                    </form>
+                </div>
+				<div><span>ปนะเภทข่าว</span></div>   			
+			</li>
+            
+             <li class="row-report clearfix">
+            	<div>
+                	<form>
+                		<input type="checkbox" name="selection1" value="Yes"  />
+                    </form>
+                </div>
+				<div><span>ประเภทข่าว</span></div>    						  			
+			</li>
+            
+            <li class="row-report gray-bg clearfix">
+            	<div>
+                	<form>
+                		<input type="checkbox" name="selection1" value="Yes" />
+                    </form>
+                </div>
+				<div><span>ปนะเภทข่าว</span></div>   			
+			</li>    
+            
+             <li class="row-report clearfix">
+            	<div>
+                	<form>
+                		<input type="checkbox" name="selection1" value="Yes"  />
+                    </form>
+                </div>
+				<div><span>ประเภทข่าว</span></div>    						  			
+			</li>
+            
+            <li class="row-report gray-bg clearfix">
+            	<div>
+                	<form>
+                		<input type="checkbox" name="selection1" value="Yes" />
+                    </form>
+                </div>
+				<div><span>ปนะเภทข่าว</span></div>   			
+			</li>    
+            
+             <li class="row-report clearfix">
+            	<div>
+                	<form>
+                		<input type="checkbox" name="selection1" value="Yes"  />
+                    </form>
+                </div>
+				<div><span>ประเภทข่าว</span></div>    						  			
+			</li>
+            
+            <li class="row-report gray-bg clearfix">
+            	<div>
+                	<form>
+                		<input type="checkbox" name="selection1" value="Yes" />
+                    </form>
+                </div>
+				<div><span>ปนะเภทข่าว</span></div>   			
+			</li>  -->       
+        </ul>
+        
+        
+        <ul class="report-box report-box09 col-r">
+        	<span>รายการคอลัมภ์ที่แสดง</span>
+         <li class="header-report clearfix">
+           <div><span>เลือก</span></div>
+           <div><span>หัวข้อ</span></div>    			
+           <div><span>UP</span></div>
+           <div><span>Down</span></div>
+           <div><span>ลบ</span></div>
+       </li>
+       
+       <li >
+        <form name="formSelect" id="formSelect" method="post" action="{base_url}index.php/dynamic/createAction">
+            <div id="destinationFields" style="width:492px; margin-right:8px">
+
+            </div>
+        </form>
+    </li>
+
+            <!-- <li class="row-report clearfix">
+            	<div><form>
+                		<input type="checkbox" name="selection1" value="Yes" />
+                    </form>
+                </div>
+				<div><span>ประเภทข่าว</span></div>    			
+    			<div><span><a href="#"></a></span></div>
+                <div><span><a href="#"></a></span></div>
+    			<div><span><a href="#"></a></span></div>			  			
+			</li>
+            
+            <li class="row-report gray-bg clearfix">
+            	<div><form>
+                		<input type="checkbox" name="selection1" value="Yes" />
+                    </form>
+                </div>
+				<div><span>ประเภทข่าว</span></div>   			
+    			<div><span><a href="#"></a></span></div>
+                <div><span><a href="#"></a></span></div>
+    			<div><span><a href="#"></a></span></div>
+			</li>
+            
+            <li class="row-report clearfix">
+            	<div><form>
+                		<input type="checkbox" name="selection1" value="Yes" />
+                    </form>
+                </div>
+				<div><span>ประเภทข่าว</span></div>    			
+    			<div><span><a href="#"></a></span></div>
+                <div><span><a href="#"></a></span></div>
+    			<div><span><a href="#"></a></span></div>			  			
+			</li>
+            
+            <li class="row-report gray-bg clearfix">
+            	<div><form>
+                		<input type="checkbox" name="selection1" value="Yes" />
+                    </form>
+                </div>
+				<div><span>ประเภทข่าว</span></div>   			
+    			<div><span><a href="#"></a></span></div>
+                <div><span><a href="#"></a></span></div>
+    			<div><span><a href="#"></a></span></div>
+			</li>
+            
+            <li class="row-report clearfix">
+            	<div><form>
+                		<input type="checkbox" name="selection1" value="Yes" />
+                    </form>
+                </div>
+				<div><span>ประเภทข่าว</span></div>    			
+    			<div><span><a href="#"></a></span></div>
+                <div><span><a href="#"></a></span></div>
+    			<div><span><a href="#"></a></span></div>			  			
+			</li>
+            
+            <li class="row-report gray-bg clearfix">
+            	<div><form>
+                		<input type="checkbox" name="selection1" value="Yes" />
+                    </form>
+                </div>
+				<div><span>ประเภทข่าว</span></div>   			
+    			<div><span><a href="#"></a></span></div>
+                <div><span><a href="#"></a></span></div>
+    			<div><span><a href="#"></a></span></div>
+			</li>
+            
+            <li class="row-report clearfix">
+            	<div><form>
+                		<input type="checkbox" name="selection1" value="Yes" />
+                    </form>
+                </div>
+				<div><span>ประเภทข่าว</span></div>    			
+    			<div><span><a href="#"></a></span></div>
+                <div><span><a href="#"></a></span></div>
+    			<div><span><a href="#"></a></span></div>			  			
+			</li>
+            
+            <li class="row-report gray-bg clearfix">
+            	<div><form>
+                		<input type="checkbox" name="selection1" value="Yes" />
+                    </form>
+                </div>
+				<div><span>ประเภทข่าว</span></div>   			
+    			<div><span><a href="#"></a></span></div>
+                <div><span><a href="#"></a></span></div>
+    			<div><span><a href="#"></a></span></div>
+         </li> -->
+         
+     </ul> 
+
+ </div><!--Select-->
+
+</div> <!--con-col-01-->
+<div class="but_form but_form02">        		
+    <input type="submit" onclick="$('#formSelect').submit();" name="logout" value="บันทึก" />            	 
+</div>
+</div>	<!--wapper-->
+
+
+
+
+</body>
+<script src="{base_url}assets/js/jquery-1.8.3.min.js"></script>
+<script src="{base_url}assets/js/jquery-ui.js"></script>
+<script src="{base_url}assets/js/fieldChooser.js"></script>
+
+<script>
+    $(function(){
+        
+        $(".select-menu > select > option:eq(0)").attr("selected","selected");
+        $(".select-menu > select").live("change",function(){
+            var selectmenu_txt = $(this).find("option:selected").text();
+            $(this).prev("span").text(selectmenu_txt);
+        });
+        
+    });
+    
+    $(document).ready(function () {
+        var $sourceFields = $("#sourceFields");
+        var $destinationFields = $("#destinationFields");
+        var $chooser = $("#fieldChooser").fieldChooser(sourceFields, destinationFields);
+    });
+</script>
+</html>

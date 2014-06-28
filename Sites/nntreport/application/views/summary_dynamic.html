@@ -1,0 +1,102 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="ie6 oldie"> <![endif]-->
+<!--[if IE 7]>    <html class="ie7 oldie"> <![endif]-->
+<!--[if IE 8]>    <html class="ie8 oldie"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="">
+<!--<![endif]-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{site_title} :: {report_name}</title>
+
+
+<link href="{base_url}assets/css/main.css" rel="stylesheet" type="text/css" />
+<link href="{base_url}assets/css/style-report.css" rel="stylesheet" type="text/css" />
+
+
+</head>
+
+<body>
+	
+    <div class="wapper">
+    	<div class="header">
+        	<div class="navlink"><span class="clearfix"><p class="float_l">
+        	<a href="{base_url}index.php/main/index"><img src="{base_url}assets/img/house.png" style="margin-top:-4px"/></a>
+        	{lbl_welcome}  <span class="blue-txt">นายชื่อ นามสกุล |</span></p><a href="{base_url}index.php/authenticator/signout" class="blue-txt link-logout">{lbl_signout}</a></span></div>
+        </div>
+        <div class="bor_bottom02"></div>
+        
+        <div>
+        	<h2>{report_name}</h2>
+        </div>
+           
+        	<!--but_form03-->       
+        
+        <div class="report-Bui"><a href="{base_url}index.php/dynamic/create">สร้างรายงาน</a></div>
+        
+        <ul class="report-box report-box07">
+			<li class="header-report bg-head clearfix">
+            	<div><span>ลำดับ</span></div>
+				<div><span>ชื่อรายงาน</span></div>    			
+    			<div><span>สถานะ</span></div>
+                <div><span>เรียกดูรายงาน</span></div>
+    			<div><span>แก้ไข</span></div>
+    			<div><span>ลบ</span></div>
+			</li>
+            
+            <li class="row-report clearfix">
+            	<div><span>1</span></div>
+				<div><span>รายงานการส่งข่าว</span></div>    			
+    			<div><span>ยกเลิกการใช้งาน</span></div>
+                <div><span><a href="#"></a></span></div>
+    			<div><span><a href="#"></a></span></div>
+                <div><span><a href="#"></a></span></div> 			  			
+			</li>
+            
+            <li class="row-report gray-bg clearfix">
+            	<div><span>2</span></div>
+				<div><span>รายงานการส่งข่าว</span></div>   			
+    			<div><span>ยกเลิกการใช้งาน</span></div>
+                <div><span><a href="#"></a></span></div>
+    			<div><span><a href="#"></a></span></div>
+                <div><span><a href="#"></a></span></div>
+			</li>
+            
+            <li class="row-report clearfix">
+            	<div><span>3</span></div>
+				<div><span>รายงานการส่งข่าว</span></div>    			
+    			<div><span>ยกเลิกการใช้งาน</span></div>
+                <div><span><a href="#"></a></span></div>
+    			<div><span><a href="#"></a></span></div>
+                <div><span><a href="#"></a></span></div> 			  			
+			</li>
+            
+            <li class="row-report gray-bg clearfix">
+            	<div><span>4</span></div>
+				<div><span>รายงานการส่งข่าว</span></div>   			
+    			<div><span>ยกเลิกการใช้งาน</span></div>
+                <div><span><a href="#"></a></span></div>
+    			<div><span><a href="#"></a></span></div>
+                <div><span><a href="#"></a></span></div>
+			</li>
+         
+            
+            </li>
+        </ul>
+        
+    </div>	<!--wapper-->
+	
+</body>
+<script src="{base_url}assets/js/jquery-1.8.3.min.js"></script>
+<script>
+$(function(){
+	
+	$(".select-menu > select > option:eq(0)").attr("selected","selected");
+	$(".select-menu > select").live("change",function(){
+		var selectmenu_txt = $(this).find("option:selected").text();
+		$(this).prev("span").text(selectmenu_txt);
+	});
+	
+});
+</script>
+</html>

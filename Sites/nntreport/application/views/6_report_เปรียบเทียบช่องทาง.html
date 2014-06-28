@@ -1,0 +1,401 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="ie6 oldie"> <![endif]-->
+<!--[if IE 7]>    <html class="ie7 oldie"> <![endif]-->
+<!--[if IE 8]>    <html class="ie8 oldie"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="">
+<!--<![endif]-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+
+
+<link href="css/main.css" rel="stylesheet" type="text/css" />
+<link href="css/style-report.css" rel="stylesheet" type="text/css" />
+
+<script src="js/jquery-1.8.3.min.js"></script>
+<script>
+$(function(){
+	
+	$(".select-menu > select > option:eq(0)").attr("selected","selected");
+	$(".select-menu > select").live("change",function(){
+		var selectmenu_txt = $(this).find("option:selected").text();
+		$(this).prev("span").text(selectmenu_txt);
+	});
+	
+});
+</script>
+</head>
+
+<body>
+	
+    <div class="wapper">
+    	<div class="header">
+        	<div class="navlink"><span class="clearfix"><p class="float_l">Welcome to : <span class="blue-txt">นายชื่อ นามสกุล |</span></p><a href="#" class="blue-txt link-logout">logout</a></span></div>
+        </div>
+        <div class="bor_bottom02"></div>
+        
+        <div>
+        	<h2>รายงานเปรียบเทียบการใช่ช่องทางการเผยแพร่</h2>
+        </div>
+        
+        <form>
+            <div class="but_form02 clearfix">
+                    <p class="float_l">วันที่</p> <input type="text" name="Date" class="float_l" /> <img src="img/Layer_217.png" class="float_l" />                
+                    <p class="float_l">ถึง</p> <input type="text" name="today" class="float_l" /> <img src="img/Layer_217.png" class="float_l" />            
+            </div>	<!--but_form02-->
+            <div class="but_form03 clearfix">
+                <div class="con_form02 float_l clearfix">            	               
+                    <span class="select-menu float_r"> 
+                    	<span>เลือกหมวดหมู่</span>             
+                            <select>
+                            <option selected="selected">หมวดหมู่ที่ 1</option>
+                            <option>หมวดหมู่ที่ 2</option>
+                            <option>หมวดหมู่ที่ 3</option>
+                            </select>
+                    </span>
+                    <p class="float_r">หมวดหมู่ข่าว</p>                        
+                <div class="clear"></div>            
+                
+                    <span class="select-menu float_r">
+                    	<span>เลือกสังกัด</span>
+                        <select>
+                            <option selected="selected">สังกัดที่ 1</option>
+                            <option>สังกัดที่ 2</option>
+                            <option>สังกัดที่ 3</option>
+                        </select>
+                        </span>
+                    <p class="float_r">สังกัด</p>
+                <div class="clear"></div>
+                
+                    <span class="select-menu float_r">
+                    	<span>เลือกภูมิภาค</span>
+                        <select>
+                            <option selected="selected">ภูมิภาค1</option>
+                            <option>ภูมิภาค2</option>
+                            <option>ภูมิภาค3</option>
+                        </select>
+                        </span>
+                    <p class="float_r">ภูมิภาค</p>
+                <div class="clear"></div>
+                
+                <span class="img_submit float_r">
+                    <a href="#"><img src="img/Layer_126.png" /></a>
+                    <a href="#"><img src="img/Layer_127.png" /></a>		
+                </span>
+                    <p class="float_r">ผู้สื่อข่าว</p>
+                <div class="clear"></div>
+                            
+                </div>	<!--con_form02-->
+    
+                                                    
+                <div class="con_form03 float_l clearfix">
+                
+                <span class="select-menu float_r">
+                		<span>เลือกหมวดหมู่ข่าวย่อย</span>              
+                            <select>
+                            <option selected="selected">หมวดหมู่ข่าวย่อย1</option>
+                            <option>หมวดหมู่ข่าวย่อย2</option>
+                            <option> หมวดหมู่ข่าวย่อย3</option>
+                            </select>
+                    </span>
+                    <p class="float_r">หมวดหมู่ข่าวย่อย</p>                        
+                <div class="clear"></div>            
+                
+                    <span class="select-menu float_r">
+                    	<span>เลือกหน่วยงาน</span>
+                        <select>
+                            <option selected="selected">หน่วยงาน1</option>
+                            <option>หน่วยงาน2</option>
+                            <option>หน่วยงาน3</option>
+                        </select>
+                        </span>
+                    <p class="float_r">หน่วยงาน</p>
+                <div class="clear"></div>
+                
+                    <span class="select-menu float_r">
+                    	<span>เลือกจังหวัด</span>
+                        <select>
+                            <option selected="selected">จังหวัด1</option>
+                            <option>จังหวัด2</option>
+                            <option> จังหวัด3</option>
+                        </select>
+                        </span>
+                    <p class="float_r">จังหวัด</p>
+                <div class="clear"></div>
+                                                
+                </div>	<!--con_form03-->
+                <div class="clear"></div>
+                
+                
+                    <div class="but_form">        		
+                        <input type="submit" name="logout" value="ออกรายงาน" />            	 
+                    </div>
+                           
+            </div>    
+        </form>
+        
+        
+        	<!--but_form03-->
+        
+        <div class="bor_bottom"></div>
+        
+        <div class="export"><a href="#"><img src="img/export.png"></a></div>
+        
+        <ul class="report-box">
+			<li class="header-report clearfix">
+            <div><span></span></div>
+				<div><span>เลขที่ข่าว</span></div>
+    			<div><span>หัวข้อข่าว</span></div>
+    			<div><span>วันที่ข่าว</span></div>
+    			<div><span>แหล่งข่าว</span></div>
+    			<div><span>สายข่าว</span></div>
+    			<div><span>ผู้สื่อข่าว</span></div>
+			</li>
+            
+            <li class="row-report clearfix">
+            <div><span>1</span></div>
+				<div><span>TNOHT<br/>5702030010087</span></div>
+    			<div><span>เกษตรกรชาวนามรวมตัวปิดถนนเพชรเกษมรอยต่อจังหวัดเพชรบุรี</span></div>
+    			<div><span>03/02/2557 14:30</span></div>
+    			<div><span>ประมวล มุ่งมาตร</span></div>
+    			<div><span>อื่นๆ</span></div>
+    			<div><span>มงคล ขำเพชร</span></div>
+			</li>
+            
+            <li class="row-report gray-bg clearfix">
+            <div><span>2</span></div>
+				<div><span>TNOHT<br/>5702030010087</span></div>
+    			<div><span>อปท.จังหวัดสรีสะเกษมอบเงิสนับสนุนการแข่งขันกีฬาเยาวชนแห่งชาติจำนวน 6 ล้านบาท</span></div>
+    			<div><span>03/02/2557 14:30</span></div>
+    			<div><span>ประมวล มุ่งมาตร</span></div>
+    			<div><span>อื่นๆ</span></div>
+    			<div><span>มงคล ขำเพชร</span></div>
+			</li>
+            
+            <li class="row-report clearfix">
+            <div><span>1</span></div>
+				<div><span>TNOHT<br/>5702030010087</span></div>
+    			<div><span>เกษตรกรชาวนามรวมตัวปิดถนนเพชรเกษมรอยต่อจังหวัดเพชรบุรี</span></div>
+    			<div><span>03/02/2557 14:30</span></div>
+    			<div><span>ประมวล มุ่งมาตร</span></div>
+    			<div><span>อื่นๆ</span></div>
+    			<div><span>มงคล ขำเพชร</span></div>
+			</li>
+            
+            <li class="row-report gray-bg clearfix">
+            <div><span>2</span></div>
+				<div><span>TNOHT<br/>5702030010087</span></div>
+    			<div><span>อปท.จังหวัดสรีสะเกษมอบเงิสนับสนุนการแข่งขันกีฬาเยาวชนแห่งชาติจำนวน 6 ล้านบาท</span></div>
+    			<div><span>03/02/2557 14:30</span></div>
+    			<div><span>ประมวล มุ่งมาตร</span></div>
+    			<div><span>อื่นๆ</span></div>
+    			<div><span>มงคล ขำเพชร</span></div>
+			</li>
+            
+            <li class="row-report clearfix">
+            <div><span>3</span></div>
+				<div><span>TNOHT<br/>5702030010087</span></div>
+    			<div><span>เกษตรกรชาวนามรวมตัวปิดถนนเพชรเกษมรอยต่อจังหวัดเพชรบุรี</span></div>
+    			<div><span>03/02/2557 14:30</span></div>
+    			<div><span>ประมวล มุ่งมาตร</span></div>
+    			<div><span>อื่นๆ</span></div>
+    			<div><span>มงคล ขำเพชร</span></div>
+			</li>
+            
+            <li class="row-report gray-bg clearfix">
+            <div><span>4</span></div>
+				<div><span>TNOHT<br/>5702030010087</span></div>
+    			<div><span>อปท.จังหวัดสรีสะเกษมอบเงิสนับสนุนการแข่งขันกีฬาเยาวชนแห่งชาติจำนวน 6 ล้านบาท</span></div>
+    			<div><span>03/02/2557 14:30</span></div>
+    			<div><span>ประมวล มุ่งมาตร</span></div>
+    			<div><span>อื่นๆ</span></div>
+    			<div><span>มงคล ขำเพชร</span></div>
+			</li>
+            
+            <li class="row-report clearfix">
+            <div><span>5</span></div>
+				<div><span>TNOHT<br/>5702030010087</span></div>
+    			<div><span>เกษตรกรชาวนามรวมตัวปิดถนนเพชรเกษมรอยต่อจังหวัดเพชรบุรี</span></div>
+    			<div><span>03/02/2557 14:30</span></div>
+    			<div><span>ประมวล มุ่งมาตร</span></div>
+    			<div><span>อื่นๆ</span></div>
+    			<div><span>มงคล ขำเพชร</span></div>
+			</li>
+            
+            <li class="row-report gray-bg clearfix">
+            <div><span>6</span></div>
+				<div><span>TNOHT<br/>5702030010087</span></div>
+    			<div><span>อปท.จังหวัดสรีสะเกษมอบเงิสนับสนุนการแข่งขันกีฬาเยาวชนแห่งชาติจำนวน 6 ล้านบาท</span></div>
+    			<div><span>03/02/2557 14:30</span></div>
+    			<div><span>ประมวล มุ่งมาตร</span></div>
+    			<div><span>อื่นๆ</span></div>
+    			<div><span>มงคล ขำเพชร</span></div>
+			</li>
+            
+            <li class="row-report clearfix">
+            <div><span>7</span></div>
+				<div><span>TNOHT<br/>5702030010087</span></div>
+    			<div><span>เกษตรกรชาวนามรวมตัวปิดถนนเพชรเกษมรอยต่อจังหวัดเพชรบุรี</span></div>
+    			<div><span>03/02/2557 14:30</span></div>
+    			<div><span>ประมวล มุ่งมาตร</span></div>
+    			<div><span>อื่นๆ</span></div>
+    			<div><span>มงคล ขำเพชร</span></div>
+			</li>
+            
+            <li class="row-report gray-bg clearfix">
+            <div><span>8</span></div>
+				<div><span>TNOHT<br/>5702030010087</span></div>
+    			<div><span>อปท.จังหวัดสรีสะเกษมอบเงิสนับสนุนการแข่งขันกีฬาเยาวชนแห่งชาติจำนวน 6 ล้านบาท</span></div>
+    			<div><span>03/02/2557 14:30</span></div>
+    			<div><span>ประมวล มุ่งมาตร</span></div>
+    			<div><span>อื่นๆ</span></div>
+    			<div><span>มงคล ขำเพชร</span></div>
+			</li>
+            
+            <li class="row-report clearfix">
+            <div><span>9</span></div>
+				<div><span>TNOHT<br/>5702030010087</span></div>
+    			<div><span>เกษตรกรชาวนามรวมตัวปิดถนนเพชรเกษมรอยต่อจังหวัดเพชรบุรี</span></div>
+    			<div><span>03/02/2557 14:30</span></div>
+    			<div><span>ประมวล มุ่งมาตร</span></div>
+    			<div><span>อื่นๆ</span></div>
+    			<div><span>มงคล ขำเพชร</span></div>
+			</li>
+            
+            <li class="row-report gray-bg clearfix">
+            <div><span>10</span></div>
+				<div><span>TNOHT<br/>5702030010087</span></div>
+    			<div><span>อปท.จังหวัดสรีสะเกษมอบเงิสนับสนุนการแข่งขันกีฬาเยาวชนแห่งชาติจำนวน 6 ล้านบาท</span></div>
+    			<div><span>03/02/2557 14:30</span></div>
+    			<div><span>ประมวล มุ่งมาตร</span></div>
+    			<div><span>อื่นๆ</span></div>
+    			<div><span>มงคล ขำเพชร</span></div>
+			</li>
+            
+            <li class="row-report clearfix">
+            <div><span>11</span></div>
+				<div><span>TNOHT<br/>5702030010087</span></div>
+    			<div><span>เกษตรกรชาวนามรวมตัวปิดถนนเพชรเกษมรอยต่อจังหวัดเพชรบุรี</span></div>
+    			<div><span>03/02/2557 14:30</span></div>
+    			<div><span>ประมวล มุ่งมาตร</span></div>
+    			<div><span>อื่นๆ</span></div>
+    			<div><span>มงคล ขำเพชร</span></div>
+			</li>
+            
+            <li class="row-report gray-bg clearfix">
+            <div><span>12</span></div>
+				<div><span>TNOHT<br/>5702030010087</span></div>
+    			<div><span>อปท.จังหวัดสรีสะเกษมอบเงิสนับสนุนการแข่งขันกีฬาเยาวชนแห่งชาติจำนวน 6 ล้านบาท</span></div>
+    			<div><span>03/02/2557 14:30</span></div>
+    			<div><span>ประมวล มุ่งมาตร</span></div>
+    			<div><span>อื่นๆ</span></div>
+    			<div><span>มงคล ขำเพชร</span></div>
+			</li>
+            
+            <li class="row-report clearfix">
+            <div><span>13</span></div>
+				<div><span>TNOHT<br/>5702030010087</span></div>
+    			<div><span>เกษตรกรชาวนามรวมตัวปิดถนนเพชรเกษมรอยต่อจังหวัดเพชรบุรี</span></div>
+    			<div><span>03/02/2557 14:30</span></div>
+    			<div><span>ประมวล มุ่งมาตร</span></div>
+    			<div><span>อื่นๆ</span></div>
+    			<div><span>มงคล ขำเพชร</span></div>
+			</li>
+            
+            <li class="row-report gray-bg clearfix">
+            <div><span>14</span></div>
+				<div><span>TNOHT<br/>5702030010087</span></div>
+    			<div><span>อปท.จังหวัดสรีสะเกษมอบเงิสนับสนุนการแข่งขันกีฬาเยาวชนแห่งชาติจำนวน 6 ล้านบาท</span></div>
+    			<div><span>03/02/2557 14:30</span></div>
+    			<div><span>ประมวล มุ่งมาตร</span></div>
+    			<div><span>อื่นๆ</span></div>
+    			<div><span>มงคล ขำเพชร</span></div>
+			</li>
+            
+            <li class="row-report clearfix">
+            <div><span>15</span></div>
+				<div><span>TNOHT<br/>5702030010087</span></div>
+    			<div><span>เกษตรกรชาวนามรวมตัวปิดถนนเพชรเกษมรอยต่อจังหวัดเพชรบุรี</span></div>
+    			<div><span>03/02/2557 14:30</span></div>
+    			<div><span>ประมวล มุ่งมาตร</span></div>
+    			<div><span>อื่นๆ</span></div>
+    			<div><span>มงคล ขำเพชร</span></div>
+			</li>
+            
+            <li class="row-report gray-bg clearfix">
+            <div><span>16</span></div>
+				<div><span>TNOHT<br/>5702030010087</span></div>
+    			<div><span>อปท.จังหวัดสรีสะเกษมอบเงิสนับสนุนการแข่งขันกีฬาเยาวชนแห่งชาติจำนวน 6 ล้านบาท</span></div>
+    			<div><span>03/02/2557 14:30</span></div>
+    			<div><span>ประมวล มุ่งมาตร</span></div>
+    			<div><span>อื่นๆ</span></div>
+    			<div><span>มงคล ขำเพชร</span></div>
+			</li>
+            
+            <li class="row-report clearfix">
+            <div><span>17</span></div>
+				<div><span>TNOHT<br/>5702030010087</span></div>
+    			<div><span>เกษตรกรชาวนามรวมตัวปิดถนนเพชรเกษมรอยต่อจังหวัดเพชรบุรี</span></div>
+    			<div><span>03/02/2557 14:30</span></div>
+    			<div><span>ประมวล มุ่งมาตร</span></div>
+    			<div><span>อื่นๆ</span></div>
+    			<div><span>มงคล ขำเพชร</span></div>
+			</li>
+            
+            <li class="row-report gray-bg clearfix">
+            <div><span>18</span></div>
+				<div><span>TNOHT<br/>5702030010087</span></div>
+    			<div><span>อปท.จังหวัดสรีสะเกษมอบเงิสนับสนุนการแข่งขันกีฬาเยาวชนแห่งชาติจำนวน 6 ล้านบาท</span></div>
+    			<div><span>03/02/2557 14:30</span></div>
+    			<div><span>ประมวล มุ่งมาตร</span></div>
+    			<div><span>อื่นๆ</span></div>
+    			<div><span>มงคล ขำเพชร</span></div>
+			</li>
+            
+            <li class="row-report clearfix">
+            <div><span>19</span></div>
+				<div><span>TNOHT<br/>5702030010087</span></div>
+    			<div><span>เกษตรกรชาวนามรวมตัวปิดถนนเพชรเกษมรอยต่อจังหวัดเพชรบุรี</span></div>
+    			<div><span>03/02/2557 14:30</span></div>
+    			<div><span>ประมวล มุ่งมาตร</span></div>
+    			<div><span>อื่นๆ</span></div>
+    			<div><span>มงคล ขำเพชร</span></div>
+			</li>
+            
+            <li class="row-report gray-bg clearfix">
+            <div><span>20</span></div>
+				<div><span>TNOHT<br/>5702030010087</span></div>
+    			<div><span>อปท.จังหวัดสรีสะเกษมอบเงิสนับสนุนการแข่งขันกีฬาเยาวชนแห่งชาติจำนวน 6 ล้านบาท</span></div>
+    			<div><span>03/02/2557 14:30</span></div>
+    			<div><span>ประมวล มุ่งมาตร</span></div>
+    			<div><span>อื่นๆ</span></div>
+    			<div><span>มงคล ขำเพชร</span></div>
+			</li>
+            
+            <li class="num_page clearfix">
+            	<div class="float_l"><span>ทั้งหมด:73 รายการ (4 หน้า)</span></div>
+                
+                <div class="pagebtn float_r clearfix">
+                	<div><a href="#"><img src="img/prew.png"></a></div>
+                    <div class="num_page02">
+                			<span class="select-menu set_pagebtn float_r">  
+                            <span>1</span>            
+            				<select>
+    							<option selected="selected">1</option>
+    							<option>2</option>
+    							<option>3</option>
+    							</select>
+							</span>                                                                  
+                    </div>
+                    <div class="num100"><span> / 100</span></div>
+                    <div><a href="#"><img src="img/next.png"></a></div>
+                    <div><a href="#"><img src="img/next2.png"></a></div>
+                </div>	<!--num_pages-->
+            </li>
+        </ul>
+        
+    </div>	<!--wapper-->
+	
+</body>
+</html>
