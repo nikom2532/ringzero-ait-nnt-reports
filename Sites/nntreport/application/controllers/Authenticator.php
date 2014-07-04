@@ -19,7 +19,7 @@ class Authenticator extends CI_Controller {
 				"lbl_password" => $this->lang->line ( 'lbl_password' ),
 				"btn_login" => $this->lang->line ( 'btn_login' ) 
 		);
-		$this->parser->parse ( "login.html", $data );
+		$this->parser->parse ( "login", $data );
 	}
 	
 	public function signin(){

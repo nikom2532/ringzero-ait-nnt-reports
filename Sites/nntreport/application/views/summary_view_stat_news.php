@@ -10,45 +10,37 @@
 <!--<![endif]-->
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title><?php echo $site_title?> :: <?php echo $report_name?></title>
+    <title><?php echo $site_title . " :: " . $report_name?></title>
+
     <link href="<?php echo base_url()?>assets/css/main.css" rel="stylesheet" type="text/css"/>
     <link href="<?php echo base_url()?>assets/css/style-report.css" rel="stylesheet" type="text/css"/>
     <link href="<?php echo base_url()?>assets/css/flick/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
     <link href="<?php echo base_url()?>assets/css/chosen.css" rel="stylesheet" type="text/css"/>
-    <style>
-        .gray-bg {
-            background: #ededed;
-        }
-    </style>
+
 </head>
-<?php
-// Include Model
-$dept = $this->department_model;
-$news = $this->news_model;
-?>
+
 <body>
+
 <div class="wapper">
 <div class="header">
-    <div class="navlink">
-     <span class="clearfix">
-      <p class="float_l">
-          <a href="<?php echo base_url()?>index.php/main/index" style="border:0"><img
-                  src="<?php echo base_url()?>assets/img/house.png"
-                  style="border-style:none; margin-bottom: -4px"/></a>
-          <?php echo $lbl_welcome?> :
-          <span class="blue-txt">{นายชื่อ นามสกุล} |</span>
-          <a href="<?php echo base_url()?>index.php/authenticator/signout"
-             class="blue-txt link-logout"><?php echo $lbl_signout?></a>
-      </p>
-  </span>
+    <div class="navlink"><span class="clearfix"><p class="float_l">
+                <a href="<?php echo base_url()?>index.php/main/index"><img
+                        src="<?php echo base_url()?>assets/img/house.png"/></a> &nbsp;
+                <?php echo $lbl_welcome?> <span class="blue-txt">{นายชื่อ นามสกุล} |</span></p><a
+                href="<?php echo base_url()?>index.php/authenticator/signout"
+                class="blue-txt link-logout"><?php echo $lbl_signout?></a></span>
     </div>
 </div>
 <div class="bor_bottom02"></div>
-<div><h2><?php echo $report_name?></h2></div>
-<form action="<?php echo base_url()?>index.php/broadcast/search" id="formSearch" method="post">
+
+<div>
+    <h2><?php echo $report_name?></h2>
+</div>
+
+<form action="<?php echo base_url()?>index.php/viewstat/search" id="formSearch" method="post">
     <div class="but_form03 clearfix">
         <div class="con_form02 float_l clearfix">
-   <span class=" float_r" style="margin-bottom:20px"> 
+   <span class=" float_r" style="margin-bottom:20px">
     <input type="text" name="start_date" id="start_date"
            value="<?php echo $start_date?>" class="float_l"
            style="width:220px; height:30px; border:solid 1px #ccc;
@@ -60,7 +52,7 @@ $news = $this->news_model;
             </p>
 
             <div class="clear"></div>
-<span class="select-menu float_r"> 
+<span class="select-menu float_r">
   <span id="newsType_text">
      <?php echo $default_select . $domain_news_category?>
  </span>
@@ -160,7 +152,7 @@ $news = $this->news_model;
         </div>
         <!--con_form02-->
         <div class="con_form03 float_l clearfix">
-   <span class=" float_r" style="margin-bottom:20px"> 
+   <span class=" float_r" style="margin-bottom:20px">
       <input type="text" name="end_date" id="end_date" value="<?php echo $end_date?>" class="float_l"
              style="width:220px; height:30px; border:solid 1px #ccc;
                  background:url('<?php echo base_url()?>assets/img/Layer_217.png') no-repeat right center #fff;"/>
@@ -169,10 +161,10 @@ $news = $this->news_model;
             <p class="float_r"><?php echo $default_to?></p>
 
             <div class="clear"></div>
-  <span class="select-menu float_r">            
+  <span class="select-menu float_r">
    <span id="newsSubType_text">
       <?php echo $default_select . $domain_sub_news_category?>
-  </span>  
+  </span>
   <select id="news_sub_type" name="news_sub_type">
       <option class="newsSubType" value="0">
           <?php echo $default_select . $domain_sub_news_category?>
@@ -195,7 +187,7 @@ $news = $this->news_model;
 <span class="select-menu float_r">
   <span id="subDepartment_text">
      <?php echo $default_select . $domain_organize?>
- </span>  
+ </span>
  <select name="sub_department" id="sub_department">
      <option class="subDepartment" value="0">
          <?php echo $default_select . $domain_organize?>
@@ -216,7 +208,7 @@ $news = $this->news_model;
 <span class="select-menu float_r">
  <span id="province_text">
     <?php echo $default_select . $domain_province?>
-</span>  
+</span>
 <select name="province" id="provinceId">
     <option class="province" value="0">
         <?php echo $default_select . $domain_province?>
@@ -243,164 +235,80 @@ $news = $this->news_model;
         <input type="hidden" name="chartType" value="1" id="chartType"/>
     </div>
 </form>
+
+
+<!--but_form03-->
+
 <div class="bor_bottom"></div>
-<div id="dialog" title="Export" style="display: none">
-    <table border="0" align="center" width="300">
-        <tr>
-            <td align="center"><a href="javascript:exportExcel()"><img
-                        src="<?php echo base_url()?>assets/img/export_excel.png"/></a></td>
-            <td align="center"><a href="javascript:exportWord()"><img
-                        src="<?php echo base_url()?>assets/img/page_word.png"/></a></td>
-            <td align="center"><a href="javascript:exportPdf()"><img
-                        src="<?php echo base_url()?>assets/img/file_extension_pdf.png"/></a></td>
-            <td align="center"><a href="javascript:exportChart()"><img
-                        src="<?php echo base_url()?>assets/img/chart_stock.png"/></a></td>
-        </tr>
-        <tr>
-            <td align="center">Excel</td>
-            <td align="center">Word</td>
-            <td align="center">PDF</td>
-            <td align="center">Chart</td>
-        </tr>
-    </table>
-</div>
-<div class="export"><a href="javascript:_exports()"><img src="<?php echo base_url()?>assets/img/export.png"></a></div>
+
+<div class="export"><a href="#"><img src="<?php echo base_url()?>assets/img/export.png"></a></div>
 <div class="contentOverflow">
     <table style="width:1300px; font-family:'supermarket'; font-size:16px; color:#666" border="0" cellpadding="1"
            cellspacing="1">
         <thead>
         <tr class="head-bar">
             <th width="50">No</th>
-            <th width="250"><?php echo $lbl_department?></th>
-            <th width="80"><?php echo $lbl_rawnews?></th>
-            <th width="80"><?php echo $lbl_thainews?></th>
+            <th width="50"><?php echo $lbl_department?></th>
+            <th width="120"><?php echo $lbl_thainews?></th>
             <th width="80"><?php echo $lbl_sharing?></th>
             <th width="80"><?php echo $lbl_ios?></th>
             <th width="80"><?php echo $lbl_android?></th>
             <th width="80"><?php echo $lbl_blackberry?></th>
             <th width="80"><?php echo $lbl_win8?></th>
             <th width="80"><?php echo $lbl_smartTV?></th>
-            <th width="80"><?php echo $lbl_facebook?></th>
-            <th width="80"><?php echo $lbl_twitter?></th>
-            <th width="80"><?php echo $lbl_email?></th>
-            <th width="80"><?php echo $lbl_rss?></th>
-            <th width="80"><?php echo $lbl_rawnews_public?></th>
-            <th width="80"><?php echo $lbl_rawnews_no_public?></th>
         </tr>
+        </thead>
         <tbody>
-        <?php $odd = 1;
-        foreach ($department_list as $val) {
-            $news->setSC07DepartmentId($val->departmentId);
-            ?>
-            <tr style="background-color:<?php echo ($odd % 2 == 0 ? "#f0f0f0" : "#fff");
-            $odd++;?>">
-                <td align="center"><?php echo $val->RowNumber?>&nbsp;</td>
-                <td>
-                    <?php
-                    $dept->setDepartmentId($val->departmentId);
-                    echo $dept->toString();
-                    ?>&nbsp;
-                </td>
-                <td align="right">
-                    <?php // RawNews
-                    $rawCount = $news->countRawNewsByDepartmentId();
-                    echo number_format($rawCount);
-                    ?>&nbsp;
-                </td>
-                <td align="right">
-                    <?php // Thainews
-                    $thainewsCount = $news->countNewsbyDepartmentAndPublictype($val->departmentId, "1");
-                    echo number_format($thainewsCount);
-                    ?>&nbsp;
-                </td>
-                <td align="right">
-                    <?php // Sharing
-                    $news->setNT08PubTypeID("11");
-                    $sharingCount = $news->countNewsbyDepartmentAndPublictype();
-                    echo number_format($sharingCount);
-                    ?>&nbsp;
-                </td>
-                <td align="right">&nbsp;</td>
-                <td align="right">&nbsp;</td>
-                <td align="right">&nbsp;</td>
-                <td align="right">&nbsp;</td>
-                <td align="right">&nbsp;</td>
-                <td align="right">
-                    <?php // Facebook
-                    $news->setNT08PubTypeID("6");
-                    $facebookCount = $news->countNewsbyDepartmentAndPublictype();
-                    echo number_format($facebookCount);
-                    ?>&nbsp;
-                </td>
-                <td align="right">
-                    <?php // Twetter
-                    $news->setNT08PubTypeID("13");
-                    $twetterCount = $news->countNewsbyDepartmentAndPublictype();
-                    echo number_format($twetterCount);
-                    ?>&nbsp;
-                </td>
-                <td align="right">
-                    <?php // Email
-                    $news->setNT08PubTypeID("15");
-                    $emailCount = $news->countNewsbyDepartmentAndPublictype();
-                    echo number_format($emailCount);
-                    ?>&nbsp;
-                </td>
-                <td align="right">
-                </td>
-                <td align="right">
-                    <?php // PublicRaw
-                    $publicRawCount = $news->countPublicNewsByDepartmentId();
-                    echo number_format($publicRawCount);
-                    ?>&nbsp;
-                </td>
-                <td align="right">
-                    <?php
-                    echo number_format($rawCount - $publicRawCount);
-                    ?>&nbsp;
-                </td>
+        <?php
+        $models=$this->department_model;
+        foreach ($department_list as $val) { ?>
+            <tr>
+                <td><?php echo $val->RowNumber?></td>
+                <td><?php
+                    $models->setDepartmentId($val->departmentId);
+                    echo $models->toString();?></td>
+
+                <td><?php echo $lbl_thainews?></td>
+                <td><?php echo $lbl_sharing?></td>
+                <td><?php echo $lbl_ios?></td>
+                <td><?php echo $lbl_android?></td>
+                <td><?php echo $lbl_blackberry?></td>
+                <td><?php echo $lbl_win8?></td>
+                <td><?php echo $lbl_smartTV?></td>
             </tr>
         <?php }?>
         </tbody>
-        </thead>
     </table>
-    <ul class="report-box">
-        <li class="num_page clearfix">
-            <div class="float_l">
-           <span><?php echo $default_total . " : " . $count_row . " " . $default_list . " (" . $total_page . " " . $default_page . ")";?>
-           </span>
+    <ul>
+    <li class="num_page clearfix">
+        <div class="float_l"><span>{default_total}:{count_row} {default_list} ({total_page} {default_page})</span>
+        </div>
+
+        <div class="pagebtn float_r clearfix">
+            <div><a href="{prev_page}"><img src="<?php echo base_url()?>assets/img/prew.png"></a></div>
+            <div class="num_page02">
+       <span class="select-menu set_pagebtn float_r">  
+        <span>{current_page}</span>            
+        <select>
+            {page_url}
+            <option
+            {selected}>{value}</option>
+            {/page_url}
+        </select>
+    </span>
             </div>
-            <div class="pagebtn float_r clearfix">
-                <div><a href="javascript:firstPage()"><img src="<?php echo base_url()?>assets/img/prew.png"></a></div>
-                <div><a href="javascript:prevPage(<?php echo $current_page?>)"><img
-                            src="<?php echo base_url()?>assets/img/prev.png"></a></div>
-                <div class="num_page02">
-                <span class="select-menu set_pagebtn float_r">  
-                  <span>
-                     <?php echo $current_page?>
-                 </span>    
-                 <select onchange="jump_page(this.value)">
-                     <?php
-                     foreach ($page_url as $val) {
-                         ?>
-                         <option
-                             value="<?php echo $val['value']?>" <?php echo $val['selected']?>><?php echo $val['value']?></option>
-                     <?php }?>
-                 </select>
-                </span>
-                </div>
-                <div class="num100"><span> / <?php echo $total_page?></span></div>
-                <div><a href="javascript:nextPage(<?php echo $current_page?>)"><img
-                            src="<?php echo base_url()?>assets/img/next.png"></a></div>
-                <div><a href="javascript:lastPage(<?php echo $total_page?>)"><img
-                            src="<?php echo base_url()?>assets/img/next2.png"></a></div>
-            </div>
-            <!--num_pages-->
-        </li>
+            <div class="num100"><span> / {total_page}</span></div>
+            <div><a href="{next_page}"><img src="<?php echo base_url()?>assets/img/next.png"></a></div>
+            <div><a href="{last_page}"><img src="<?php echo base_url()?>assets/img/next2.png"></a></div>
+        </div>
+        <!--num_pages-->
+    </li>
     </ul>
 </div>
 </div>
 <!--wapper-->
+
+</body>
 
 <script src="<?php echo base_url()?>assets/js/jquery-1.8.3.min.js"></script>
 <script src="<?php echo base_url()?>assets/js/jquery-ui.js"></script>
@@ -609,5 +517,4 @@ function exportChart() {
 }
 
 </script>
-</body>
 </html>

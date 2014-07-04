@@ -12,6 +12,9 @@ class Ait
 	var $datetime    = '';
 	var $data        = array();
 	var $parseData = array();
+	function queryString($query){
+		$this->queryString = $query;
+	}
 	function __construct()
 	{
 		$CI =& get_instance();
@@ -84,6 +87,7 @@ class Ait
 	function query()
 	{
 		$CI =& get_instance();
+		$this->init();
 		$rs['query'] = $CI->db->query($this->queryString, $this->condition);
 		$rs['row'] = $rs['query']->row();
 		$rs['num_row'] = $rs['query']->num_rows();

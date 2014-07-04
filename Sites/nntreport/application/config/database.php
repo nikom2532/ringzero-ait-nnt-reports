@@ -49,8 +49,8 @@ $active_group = 'default';
 $active_record = TRUE;
 //JAWSOUR-PC
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'nikom2532';
-$db['default']['password'] = 'cominter';
+$db['default']['username'] = 'sa';
+$db['default']['password'] = '1234';
 $db['default']['database'] = 'NNT_DataCenter_2';
 $db['default']['dbdriver'] = 'sqlsrv';
 $db['default']['dbprefix'] = '';

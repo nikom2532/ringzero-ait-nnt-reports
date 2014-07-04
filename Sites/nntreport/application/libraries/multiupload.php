@@ -35,7 +35,9 @@ class Multiupload{
             if($file['error'] == 0){
                 if ($CI->upload->do_upload($field)){
                         $data = $CI->upload->data();
-                        array_push($this->file_name, $data['file_name']);
+                        $name = date("YmdHis").$data['file_ext'];
+                        rename($data['full_path'],$data['file_path'].$name);
+                        array_push($this->file_name, $name);
                 }else{
                         $errors = $CI->upload->display_errors();
                 }

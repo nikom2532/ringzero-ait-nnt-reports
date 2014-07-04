@@ -11,6 +11,7 @@ class Actornews extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
+		$this->load->model(array("user_model","news_model","department_model","region_model","province_model"));
 		$this->lang->load( 'actornews', 'thai' );
 		$this->ait->parseData += array(
 			"report_name"       => $this->lang->line( 'summary_actor_news' ),
@@ -32,7 +33,7 @@ class Actornews extends CI_Controller
 	*-----------------------------------------------------------------*/
 	public function init()
 	{
-		$this->parser->parse( "summary_actor_news.html", $this->ait->parseData );
+		$this->parser->parse( "summary_actor_news", $this->ait->parseData );
 	}
 	
 	/*-----------------------------------------------------------------
@@ -42,46 +43,25 @@ class Actornews extends CI_Controller
 	*-----------------------------------------------------------------*/
 	public function datalist($page=1) {
 		// Samples data
-		$result_array = array(
-			array(
-				"no"=>"1",
-				"news_date"=>"03/02/2557",
-				"region"=>"กลาง",
-				"province"=>"สระบุรี",
-				"actor_news"=>"ถนอม",
-				"qty"=>"10",
-				),
-			array(
-				"no"=>"1",
-				"news_date"=>"03/02/2557",
-				"region"=>"กลาง",
-				"province"=>"สระบุรี",
-				"actor_news"=>"ถนอม",
-				"qty"=>"10",
-				),
-			array(
-				"no"=>"1",
-				"news_date"=>"03/02/2557",
-				"region"=>"กลาง",
-				"province"=>"สระบุรี",
-				"actor_news"=>"ถนอม",
-				"qty"=>"10",
-				),
-			array(
-				"no"=>"1",
-				"news_date"=>"03/02/2557",
-				"region"=>"กลาง",
-				"province"=>"สระบุรี",
-				"actor_news"=>"ถนอม",
-				"qty"=>"10",
-				)
-			
-			);
-
-		$this->ait->pagination($result_array,"actornews/datalist/",$page);
+		$row_per_page = 20;
+		$region_list = $this->region_model->findAll(array("Y"));
+		//=================================================================================
+		
+		$result_array = $this->news_model->findAllDistinctDay($page,$row_per_page);
+		$count_row = $this->news_model->countAllDistinctDay();
+		
+		//=================================================================================
+		
+		$this->ait->pagination($count_row,"actornews/datalist/",$page,$row_per_page);
+		
 		$this->ait->parseData +=  array(
-			"result_array" => $result_array,
-			"count_row"=>count($result_array)
+			"region_list"=>$region_list['result'],
+			"result_array" => $result_array['result'],
+			"count_row"=>$count_row,
+			"start_date"=>"",
+			"end_date"=>"",
+			"region"=>"",
+			"province"=>""
 			); 
 		$this->init();
 	}

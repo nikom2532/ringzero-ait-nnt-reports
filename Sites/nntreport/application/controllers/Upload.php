@@ -21,6 +21,7 @@ class upload extends CI_Controller
 		$this->multiupload->upload_path = "./upload";
 		$this->multiupload->allowed_types = "jpg|png";
 		$this->multiupload->max_size = "2048";
+
 		$this->multiupload->init();
 		$file_name = $this->multiupload->do_upload();
 

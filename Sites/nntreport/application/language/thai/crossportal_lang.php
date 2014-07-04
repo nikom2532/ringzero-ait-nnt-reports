@@ -6,8 +6,8 @@ $lang['lbl_news_ori'] = "แหล่งข่าว";
 $lang['lbl_news_line'] = "สายข่าว";
 $lang['lbl_news_by']="ผู้สื่อข่าว";
 
-$lang['lbl_department'] = "หน่วยงาน";
-$lang['lbl_rawnews'] = "ข่าวดิบทั้งหมด";
+$lang['lbl_year'] = "ปี";
+$lang['lbl_month'] = "เดือน";
 $lang['lbl_thainews'] = "Thainews";
 $lang['lbl_sharing'] = "Sharing";
 $lang['lbl_ios'] = "IOS";

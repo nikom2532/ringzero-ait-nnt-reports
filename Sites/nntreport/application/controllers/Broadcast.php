@@ -43,7 +43,7 @@ class Broadcast extends CI_Controller {
 		
 	}
 
-	public function index($page=1){
+	function index($page=1){
 		$this->datalist($page);
 	}
 
@@ -51,7 +51,7 @@ class Broadcast extends CI_Controller {
 	* TODO : Initialize data 
 	* @return: 	parser data to view/summary_broadcast_news.html template. 
 	*-----------------------------------------------------------------*/
-	public function init(){
+	function init(){
 		$this->load->view( "summary_broadcast_news", $this->ait->parseData );
 	}
 	
@@ -60,35 +60,39 @@ class Broadcast extends CI_Controller {
 	* @agument: $page : is a current page active.
 	* @return: 	setter Array data in Variable $data. 
 	*-----------------------------------------------------------------*/
-	public function datalist($page=1) {
-		// Samples data
+	function datalist($page=1) {
 		$row_per_page = 20;
+		// Include Library
+		$ait = $this->ait;
+		// Include Model
+		$newsType = $this->news_type_model;
+		$dept = $this->department_model;
+		$region = $this->region_model;
+		$publicType = $this->publicType_model;
+		$users = $this->user_model;
 
-		$newsType_list = $this->news_type_model->findAll(array("Y"));
-		$parentDepartment_list = $this->department_model->findParentDepartment(array("Y"));
-		$region_list = $this->region_model->findAll(array("Y"));
-		$publicType_list = $this->publicType_model->findAll(array("Y"));
-		$user_list = $this->user_model->findAll();
+		$newsType_list = $newsType->findAll();
+		$parentDepartment_list = $dept->findParentDepartment();
+		$region_list = $region->findAll();
+		$publicType_list = $publicType->findAll();
+		$user_list = $users->findAll();
 
+		// Primary Data====================================================================
+		$dept->setCurrentPage($page);
+		$dept->setPageRow($row_per_page);
+		$department_list = $dept->findAll();
+		$count_row = $dept->count();		
 		//=================================================================================
 		
-		$department_list = $this->department_model->findAll($page,$row_per_page);
-
-		$count_row = $this->department_model->count(array("Y"));
-		
-		//=================================================================================
-
-		$result_array = $this->news_model->findAll($page,$row_per_page);
-		
-		$this->ait->pagination($count_row,"broadcast/datalist/",$page,$row_per_page);
+		$ait->pagination($count_row,"broadcast/datalist/",1,20);
 		
 		$this->ait->parseData +=  array(
-			"newsType_list"=>$newsType_list["result"],
-			"parentDepartment_list"=>$parentDepartment_list['result'],
-			"region_list"=>$region_list['result'],
-			"publicType_list"=>$publicType_list['result'],
-			"user_list"=>$user_list['result'],
-			"department_list" => $department_list['result'],
+			"newsType_list"=>$newsType_list,
+			"parentDepartment_list"=>$parentDepartment_list,
+			"region_list"=>$region_list,
+			"publicType_list"=>$publicType_list,
+			"user_list"=>$user_list,
+			"department_list" => $department_list,
 			"count_row"=>$count_row,
 			"start_date"=>"",
 			"end_date"=>"",
@@ -109,59 +113,71 @@ class Broadcast extends CI_Controller {
 	* @return: 	setter Array data in Variable $data. 
 	*-----------------------------------------------------------------*/
 
-	public function search($page=1){
+	function search($page=1){
 		$row_per_page = 20;
+		// Include Library
+		$ait = $this->ait;
+		// Include Model
+		$newsType = $this->news_type_model;
+		$dept = $this->department_model;
+		$region = $this->region_model;
+		$publicType = $this->publicType_model;
+		$news = $this->news_model;
+		$users = $this->user_model;
+
+		$newsType_list = $newsType->findAll();
+		$parentDepartment_list = $dept->findParentDepartment();
+		$region_list = $region->findAll();
+		$publicType_list = $publicType->findAll();
+		$user_list = $users->findAll();
+
+		$news->setStartDate($_POST['start_date']);
+		$news->setEndDate($_POST['end_date']);
+		$news->setSubNewsTypeId($_POST['news_sub_type']);
+		$news->setNewsTypeId($_POST['newsType']);
+		$news->setRegionId($_POST['region']);
+		$news->setParentDepartmentId($_POST['department']);
+		$news->setDepartmentId($_POST['sub_department']);
+		$news->setProvinceId($_POST['province']);
+		$dept->setRegionId($_POST['region']);
+		$dept->setParentDepartmentId($_POST['department']);
+		$dept->setDepartmentId($_POST['sub_department']);
+		$dept->setProvinceId($_POST['province']);
+		$dept->setReporterId($_POST['userId']);
 		
-		$newsType_list = $this->news_type_model->findAll(array("Y"));
-		$parentDepartment_list = $this->department_model->findParentDepartment(array("Y"));
-		$region_list = $this->region_model->findAll(array("Y"));
-		$publicType_list = $this->publicType_model->findAll(array("Y"));
-		$user_list = $this->user_model->findAll();
-
-		$this->news_model->setStartDate($_POST['start_date']);
-		$this->news_model->setEndDate($_POST['end_date']);
-		$this->department_model->NT02_TypeID = $_POST['newsType'];
-		$this->department_model->CM05_RegionID = $_POST['region'];
-		$this->news_model->setSubNewsType($_POST['news_sub_type']);
-		$this->department_model->SC07_ParentDepartmentId = $_POST['department'];
-		$this->department_model->SC07_DepartmentId = $_POST['sub_department'];
-		$this->department_model->CM06_ProvinceID = $_POST['province'];
-		$this->department_model->NT01_ReporterID = $_POST['userId'];
-		
-
-		$count_row = $this->department_model->count(array("Y"));
-
 		$newsSubType = array();
 		if($_POST['newsType']){
 			$this->load->model("news_sub_type_model","nstm");
-			$this->nstm->NT02_TypeID = $_POST['newsType'];
-			$result = $this->nstm->findByTypeID(array("Y"));
-			$newsSubType = $result['result'];	
+			$this->nstm->setTypeId($_POST['newsType']);
+			$newsSubType = $this->nstm->findByTypeID();
 		}
 		$subDepartment = array();
 		if($_POST['department']){
 			$this->load->model("department_model","dept");
-			$this->dept->SC07_ParentDepartmentId = $_POST['department'];
-			$result = $this->dept->findChildDepartment(array("Y"));
-			$subDepartment = $result['result'];
+			$this->dept->setParentDepartmentId($_POST['department']);
+			$subDepartment = $this->dept->findChildDepartment();
 		}
 		$province = array();
 		if($_POST['region']){
 			$this->load->model("province_model","prov");
-			$this->prov->CM05_RegionID = $_POST['region'];
-			$result = $this->prov->findByRegionId(array("Y"));
-			$province = $result['result'];
+			$this->prov->setRegionId($_POST['region']);
+			$province = $this->prov->findByRegionId();
 		}
 		
-		$department_list = $this->department_model->findAll($page,$row_per_page);
+		// Primary Data====================================================================
+		$dept->setCurrentPage($page);
+		$dept->setPageRow($row_per_page);
+		$department_list = $dept->findAll();
+		$count_row = $dept->count();		
+		//=================================================================================
 		
 		$this->ait->pagination($count_row,"broadcast/search/",$page,$row_per_page);
 		$this->ait->parseData +=  array(
-			"newsType_list"=>$newsType_list["result"],
-			"parentDepartment_list"=>$parentDepartment_list['result'],
-			"region_list"=>$region_list['result'],
-			"user_list"=>$user_list['result'],
-			"department_list" => $department_list['result'],
+			"newsType_list"=>$newsType_list,
+			"parentDepartment_list"=>$parentDepartment_list,
+			"region_list"=>$region_list,
+			"user_list"=>$user_list,
+			"department_list" => $department_list,
 			"count_row"=>$count_row,
 			"start_date"=>$_POST['start_date'],
 			"end_date"=>$_POST['end_date'],
@@ -175,61 +191,77 @@ class Broadcast extends CI_Controller {
 			"province"=>$_POST['province'],
 			"provinceList"=>$province,
 			"userId"=>$_POST['userId'],
-			"publicType_list"=>$publicType_list['result']
+			"publicType_list"=>$publicType_list
 		); 
 		$this->init();
 	}
 	
 	function ajaxNewssubtype($typeId) {
 		$this->load->model("news_sub_type_model","nstm");
-		$this->nstm->NT02_TypeID = $typeId;
-		$result = $this->nstm->findByTypeID(array("Y"));
+		$this->nstm->setTypeId($typeId);
+		$result = $this->nstm->findByTypeID();
 		$optionString = "<option value='0'>".$this->lang->line( 'default_select' ).$this->lang->line( 'domain_sub_news_category' )."</option>";
-		foreach($result['result'] as $val){
-			$optionString .="<option value='".$val->NT03_SubTypeID."'>".$val->NT03_SubTypeName."</option>";
+		foreach($result as $val){
+			$optionString .="<option value='".$val->subTypeId."'>".$val->subTypeName."</option>";
 		}
 		echo $optionString;
 	}
 	
 	function ajaxDepartment($deptId){
 		$this->load->model("department_model","dept");
-		$this->dept->SC07_ParentDepartmentId = $deptId;
-		$result = $this->dept->findChildDepartment(array("Y"));
+		$this->dept->setParentDepartmentId($deptId);
+		$result = $this->dept->findChildDepartment();
 		$optionString = "<option value='0'>".$this->lang->line( 'default_select' ).$this->lang->line( 'domain_organize' )."</option>";
-		foreach($result['result'] as $val){
-			$optionString .="<option value='".$val->SC07_DepartmentId."'>".$val->SC07_DepartmentName."</option>";
+		foreach($result as $val){
+			$optionString .="<option value='".$val->departmentId."'>".$val->departmentName."</option>";
 		}
 		echo $optionString;
 	}
 	
 	function ajaxRegion($regionId){
 		$this->load->model("province_model","prov");
-		$this->prov->CM05_RegionID = $regionId;
-		$result = $this->prov->findByRegionId(array("Y"));
+		$this->prov->setRegionId($regionId);
+		$result = $this->prov->findByRegionId();
 		$optionString = "<option value='0'>".$this->lang->line( 'default_select' ).$this->lang->line( 'domain_province' )."</option>";
-		foreach($result['result'] as $val){
-			$optionString .="<option value='".$val->CM06_ProvinceID."'>".$val->CM06_ProvinceName."</option>";
+		foreach($result as $val){
+			$optionString .="<option value='".$val->provinceId."'>".$val->provinceName."</option>";
 		}
 		echo $optionString;
 	}
 	
-	function export_excel($page=1){
+	function export_excel(){
 		
-		$this->news_model->setStartDate($_POST['start_date']);
-		$this->news_model->setEndDate($_POST['end_date']);
-		$this->news_model->setNewsType($_POST['newsType']);
-		$this->news_model->setRegion($_POST['region']);
-		$this->news_model->setSubNewsType($_POST['news_sub_type']);
-		$this->news_model->setDepartment($_POST['department']);
-		$this->news_model->setSubDepartment($_POST['sub_department']);
-		$this->news_model->setProvince($_POST['province']);
-		$this->news_model->setUserId($_POST['userId']);
+		$ait = $this->ait;
+		// Include Model
+		$newsType = $this->news_type_model;
+		$dept = $this->department_model;
+		$region = $this->region_model;
+		$publicType = $this->publicType_model;
+		$news = $this->news_model;
+		$users = $this->user_model;
+
+		$news->setStartDate($_POST['start_date']);
+		$news->setEndDate($_POST['end_date']);
+		$news->setSubNewsTypeId($_POST['news_sub_type']);
+		$news->setNewsTypeId($_POST['newsType']);
+		$news->setRegionId($_POST['region']);
+		$news->setParentDepartmentId($_POST['department']);
+		$news->setDepartmentId($_POST['sub_department']);
+		$news->setProvinceId($_POST['province']);
+
+		$dept->setRegionId($_POST['region']);
+		$dept->setParentDepartmentId($_POST['department']);
+		$dept->setDepartmentId($_POST['sub_department']);
+		$dept->setProvinceId($_POST['province']);
+		$dept->setReporterId($_POST['userId']);
 		
-		$count_row = $this->news_model->countBy();
-		
-		$result_array = $this->news_model->search($page,$count_row);
+		//Primary Data====================================================================
+		$dept->setCurrentPage(0);
+		$department_list = $dept->findAll();
+		//=================================================================================
+
 		$data = array(
-			"result" =>$result_array['result']
+			"result" =>$department_list
 		);
 			
 		$this->load->view("summary_broadcast_excel",$data);
@@ -237,57 +269,116 @@ class Broadcast extends CI_Controller {
 	
 	function export_pdf($page=1){
 		
-		$this->news_model->setStartDate($_POST['start_date']);
-		$this->news_model->setEndDate($_POST['end_date']);
-		$this->news_model->setNewsType($_POST['newsType']);
-		$this->news_model->setRegion($_POST['region']);
-		$this->news_model->setSubNewsType($_POST['news_sub_type']);
-		$this->news_model->setDepartment($_POST['department']);
-		$this->news_model->setSubDepartment($_POST['sub_department']);
-		$this->news_model->setProvince($_POST['province']);
-		$this->news_model->setUserId($_POST['userId']);
+		$ait = $this->ait;
+		// Include Model
+		$newsType = $this->news_type_model;
+		$dept = $this->department_model;
+		$region = $this->region_model;
+		$publicType = $this->publicType_model;
+		$news = $this->news_model;
+		$users = $this->user_model;
+
+		$news->setStartDate($_POST['start_date']);
+		$news->setEndDate($_POST['end_date']);
+		$news->setSubNewsTypeId($_POST['news_sub_type']);
+		$news->setNewsTypeId($_POST['newsType']);
+		$news->setRegionId($_POST['region']);
+		$news->setParentDepartmentId($_POST['department']);
+		$news->setDepartmentId($_POST['sub_department']);
+		$news->setProvinceId($_POST['province']);
+
+		$dept->setRegionId($_POST['region']);
+		$dept->setParentDepartmentId($_POST['department']);
+		$dept->setDepartmentId($_POST['sub_department']);
+		$dept->setProvinceId($_POST['province']);
+		$dept->setReporterId($_POST['userId']);
 		
-		$count_row = $this->news_model->countBy();
-		
-		$result_array = $this->news_model->search($page,$count_row);
+		//Primary Data====================================================================
+		$dept->setCurrentPage(0);
+		$department_list = $dept->findAll();
+		//=================================================================================
+
 		$data = array(
-			"result" =>$result_array['result'],
-			"count" =>$result_array['num_row']
+			"result" =>$department_list
 		);
 			
 		$this->load->view("summary_broadcast_pdf",$data);
 	}
 
-	function generateChart($page=1){
+	function export_word($page=1){
 
-		$this->news_model->setStartDate($_POST['start_date']);
-		$this->news_model->setEndDate($_POST['end_date']);
-		$this->news_model->setNewsType($_POST['newsType']);
-		$this->news_model->setRegion($_POST['region']);
-		$this->news_model->setSubNewsType($_POST['news_sub_type']);
-		$this->news_model->setDepartment($_POST['department']);
-		$this->news_model->setSubDepartment($_POST['sub_department']);
-		$this->news_model->setProvince($_POST['province']);
-		$this->news_model->setUserId($_POST['userId']);
-		$data =  $this->ait->parseData;
+		$ait = $this->ait;
+		// Include Model
+		$newsType = $this->news_type_model;
+		$dept = $this->department_model;
+		$region = $this->region_model;
+		$publicType = $this->publicType_model;
+		$news = $this->news_model;
+		$users = $this->user_model;
 
-		$chartType = $_POST["chartType"];
-		if($chartType=="1"){
-			$newsType = $this->news_type_model->findAll(array("Y"));
-			$data['task'] = $newsType["result"];
-			$qty = array();
-			foreach ($newsType['result'] as $val) {
-				$count = $this->news_model->countByNewsType($val->NT02_TypeID);
-				array_push($qty, $count);
-			}
-			$data['qty'] = $qty;
-		}
-		$count_row = $this->news_model->countBy();
+		$news->setStartDate($_POST['start_date']);
+		$news->setEndDate($_POST['end_date']);
+		$news->setSubNewsTypeId($_POST['news_sub_type']);
+		$news->setNewsTypeId($_POST['newsType']);
+		$news->setRegionId($_POST['region']);
+		$news->setParentDepartmentId($_POST['department']);
+		$news->setDepartmentId($_POST['sub_department']);
+		$news->setProvinceId($_POST['province']);
+
+		$dept->setRegionId($_POST['region']);
+		$dept->setParentDepartmentId($_POST['department']);
+		$dept->setDepartmentId($_POST['sub_department']);
+		$dept->setProvinceId($_POST['province']);
+		$dept->setReporterId($_POST['userId']);
 		
-		$result_array = $this->news_model->search($page,$count_row);
-		$this->ait->parseData +=  array(
-			"result" =>$result_array['result'],
-			"count" =>$result_array['num_row']
+		//Primary Data====================================================================
+		$dept->setCurrentPage(0);
+		$department_list = $dept->findAll();
+		//=================================================================================
+
+		$data = array(
+			"result" =>$department_list
+		);
+			
+		$this->load->view("summary_broadcast_word",$data);
+	}
+
+	function export_chart(){
+
+		$ait = $this->ait;
+		// Include Model
+		$newsType = $this->news_type_model;
+		$dept = $this->department_model;
+		$region = $this->region_model;
+		$publicType = $this->publicType_model;
+		$news = $this->news_model;
+		$users = $this->user_model;
+
+		$news->setStartDate($_POST['start_date']);
+		$news->setEndDate($_POST['end_date']);
+		$news->setSubNewsTypeId($_POST['news_sub_type']);
+		$news->setNewsTypeId($_POST['newsType']);
+		$news->setRegionId($_POST['region']);
+		$news->setParentDepartmentId($_POST['department']);
+		$news->setDepartmentId($_POST['sub_department']);
+		$news->setProvinceId($_POST['province']);
+
+		$dept->setRegionId($_POST['region']);
+		$dept->setParentDepartmentId($_POST['department']);
+		$dept->setDepartmentId($_POST['sub_department']);
+		$dept->setProvinceId($_POST['province']);
+		$dept->setReporterId($_POST['userId']);
+		
+		//Primary Data====================================================================
+		$dept->setCurrentPage(0);
+		$department_list = $dept->findAll();
+		//=================================================================================
+
+		$data = array(
+			"result" =>$department_list,
+			"report_name" => $this->lang->line( 'summary_broadcast_news' ),
+			"lbl_welcome" => $this->lang->line( 'lbl_welcome' ),
+			"lbl_signout" => $this->lang->line( 'lbl_signout' )
 		);
 		$this->load->view("summary_broadcast_chart",$data);
 	}
